@@ -89,6 +89,17 @@ public class PaymentScheduleEntity implements Serializable {
     public Date getNextPaymentDue() {
         return this.nextPaymentDue;
     }
+    public void setDateLastPayment( Date dateLastPayment ) {
+        if(account != null) {
+            this.account.setDateLastPayment(dateLastPayment);
+        }
+    }
+    public Date getDateLastPayment() {
+        if(account != null) {
+            this.account.getDateLastPayment();
+        }
+        return null;
+    }
 
     //--- DATABASE MAPPING : balance_due ( DOUBLE ) 
     public void setBalanceDue( Double balanceDue ) {

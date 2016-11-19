@@ -26,6 +26,8 @@ public class PaymentSchedule implements Serializable {
 	// ----------------------------------------------------------------------
 
 	private Date nextPaymentDue;
+        
+        private Date dateLastPayment;
 
 	private Double balanceDue;
 
@@ -52,6 +54,14 @@ public class PaymentSchedule implements Serializable {
 
 	public Date getNextPaymentDue() {
 		return this.nextPaymentDue;
+	}
+        
+        public void setDateLastPayment(Date dateLastPayment) {
+		this.dateLastPayment = dateLastPayment;
+	}
+
+	public Date getDateLastPayment() {
+		return this.dateLastPayment;
 	}
 
 	public void setBalanceDue(Double balanceDue) {

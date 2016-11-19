@@ -24,111 +24,117 @@ public class Account implements Serializable {
     // ENTITY DATA FIELDS 
     //----------------------------------------------------------------------    
     @NotNull
-    @Size( min = 1, max = 45 )
+    @Size(min = 1, max = 45)
     private String accountName;
-
 
     private Double originalBalance;
 
-
     private Double currentBalance;
 
+    private Date dateLastPayment;
 
     private Date dateOpened;
 
-
     private Date dateClosed;
 
-
     private Date dateCreated;
-
 
     private Date dateModified;
 
     @NotNull
     private Integer accountTypeId;
 
-
-
     //----------------------------------------------------------------------
     // GETTER & SETTER FOR THE KEY FIELD
     //----------------------------------------------------------------------
-    public void setId( Integer id ) {
-        this.id = id ;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Integer getId() {
         return this.id;
     }
 
-
     //----------------------------------------------------------------------
     // GETTERS & SETTERS FOR FIELDS
     //----------------------------------------------------------------------
-    public void setAccountName( String accountName ) {
+    public void setAccountName(String accountName) {
         this.accountName = accountName;
     }
+
     public String getAccountName() {
         return this.accountName;
     }
 
-    public void setOriginalBalance( Double originalBalance ) {
+    public void setOriginalBalance(Double originalBalance) {
         this.originalBalance = originalBalance;
     }
+
     public Double getOriginalBalance() {
         return this.originalBalance;
     }
 
-    public void setCurrentBalance( Double currentBalance ) {
+    public void setCurrentBalance(Double currentBalance) {
         this.currentBalance = currentBalance;
     }
+
     public Double getCurrentBalance() {
         return this.currentBalance;
     }
 
-    public void setDateOpened( Date dateOpened ) {
+    public void setDateLastPayment(Date dateLastPymt) {
+        this.dateLastPayment = dateLastPymt;
+    }
+
+    public Date getDateLastPayment() {
+        return this.dateLastPayment;
+    }
+
+    public void setDateOpened(Date dateOpened) {
         this.dateOpened = dateOpened;
     }
+
     public Date getDateOpened() {
         return this.dateOpened;
     }
 
-    public void setDateClosed( Date dateClosed ) {
+    public void setDateClosed(Date dateClosed) {
         this.dateClosed = dateClosed;
     }
+
     public Date getDateClosed() {
         return this.dateClosed;
     }
 
-    public void setDateCreated( Date dateCreated ) {
+    public void setDateCreated(Date dateCreated) {
         this.dateCreated = dateCreated;
     }
+
     public Date getDateCreated() {
         return this.dateCreated;
     }
 
-    public void setDateModified( Date dateModified ) {
+    public void setDateModified(Date dateModified) {
         this.dateModified = dateModified;
     }
+
     public Date getDateModified() {
         return this.dateModified;
     }
 
-    public void setAccountTypeId( Integer accountTypeId ) {
+    public void setAccountTypeId(Integer accountTypeId) {
         this.accountTypeId = accountTypeId;
     }
+
     public Integer getAccountTypeId() {
         return this.accountTypeId;
     }
 
-
     //----------------------------------------------------------------------
     // toString METHOD
     //----------------------------------------------------------------------
- 
-        public String toString() { 
+    public String toString() {
         return this.accountName;
-    } 
-
+    }
 
 }

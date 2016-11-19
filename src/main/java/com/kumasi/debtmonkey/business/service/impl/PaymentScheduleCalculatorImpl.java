@@ -10,12 +10,14 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import org.springframework.stereotype.Service;
 
 
 /**
  *
  * @author obasola
  */
+@Service
 public class PaymentScheduleCalculatorImpl implements PaymentScheduleCalculator {
     protected DateFormat df = new SimpleDateFormat("MM-dd-yyyy");
     private Calendar calendar;

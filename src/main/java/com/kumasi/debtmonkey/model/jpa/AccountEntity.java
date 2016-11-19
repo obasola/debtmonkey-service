@@ -55,8 +55,13 @@ public class AccountEntity implements Serializable {
     private Double     currentBalance ;
 
     @Temporal(TemporalType.DATE)
+    @Column(name="date_last_payment")
+    private Date       dateLastPayment   ;
+    
+    @Temporal(TemporalType.DATE)
     @Column(name="date_opened")
     private Date       dateOpened   ;
+
 
     @Temporal(TemporalType.DATE)
     @Column(name="date_closed")
@@ -131,6 +136,14 @@ public class AccountEntity implements Serializable {
         return this.currentBalance;
     }
 
+    //--- DATABASE MAPPING : date_last_payment ( DATE ) 
+    public void setDateLastPayment( Date dateLastPayment ) {
+        this.dateLastPayment = dateLastPayment;
+    }
+    public Date getDateLastPayment() {
+        return this.dateLastPayment;
+    }
+    
     //--- DATABASE MAPPING : date_opened ( DATE ) 
     public void setDateOpened( Date dateOpened ) {
         this.dateOpened = dateOpened;

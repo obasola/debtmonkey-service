@@ -4,19 +4,24 @@
  */
 package com.kumasi.debtmonkey.business.service.mapping;
 
+import com.kumasi.debtmonkey.business.service.PaymentScheduleCalculator;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.stereotype.Component;
 import com.kumasi.debtmonkey.model.PaymentSchedule;
 import com.kumasi.debtmonkey.model.jpa.PaymentScheduleEntity;
 import com.kumasi.debtmonkey.model.jpa.AccountEntity;
+import org.jboss.logging.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Mapping between entity beans and display beans.
  */
 @Component
 public class PaymentScheduleServiceMapper extends AbstractServiceMapper {
-
+    private Logger logger = Logger.getLogger(PaymentScheduleServiceMapper.class);
+    @Autowired
+    private PaymentScheduleCalculator calculator;
 	/**
 	 * ModelMapper : bean to bean mapping library.
 	 */
@@ -45,6 +50,12 @@ public class PaymentScheduleServiceMapper extends AbstractServiceMapper {
 		//--- Link mapping ( link to Account )
 		if(paymentScheduleEntity.getAccount() != null) {
 			paymentSchedule.setAccountId(paymentScheduleEntity.getAccount().getId());
+                       try{
+                            paymentSchedule.setNextPaymentDue(calculator.getNextPaymentDate(paymentScheduleEntity.getAccount().getDateLastPayment()));                        
+                       }catch(Exception e) {
+                           logger.info(e.getMessage());
+                       }
+                        paymentSchedule.setDateLastPayment(paymentScheduleEntity.getAccount().getDateLastPayment()); 
 		}
 		return paymentSchedule;
 	}
