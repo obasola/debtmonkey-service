@@ -3,14 +3,15 @@
     
 	<persistence-unit name="persistence-unit1" transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
-		<class>com.kumasi.debtmonkey.model.jpa.AccountEntity</class>
+                <class>com.kumasi.debtmonkey.model.jpa.AccountEntity</class>
 		<class>com.kumasi.debtmonkey.model.jpa.AccountAddressEntity</class>
 		<class>com.kumasi.debtmonkey.model.jpa.AccountTypeEntity</class>
 		<class>com.kumasi.debtmonkey.model.jpa.AddressTypeEntity</class>
-		<class>com.kumasi.debtmonkey.model.jpa.PaymentScheduleEntity</class>
-		<properties>
+                <class>com.kumasi.debtmonkey.model.jpa.PaymentHistoryEntity</class>
+                <class>com.kumasi.debtmonkey.model.jpa.PaymentScheduleEntity</class>
+		
+                <properties>
 			<!-- Database configuration -->
-			<!-- No database definition for database id 4 : Derby used as an example -->
 			<property name="hibernate.connection.driver_class"  value="com.mysql.jdbc.Driver"/>
 			<property name="hibernate.connection.url"           value="jdbc:mysql://localhost:3306/homeAccount"/>
 			<property name="hibernate.connection.username"      value="root"/>
