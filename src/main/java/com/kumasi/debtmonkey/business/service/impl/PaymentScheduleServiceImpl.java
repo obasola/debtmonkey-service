@@ -5,27 +5,25 @@
 package com.kumasi.debtmonkey.business.service.impl;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 
-import com.kumasi.debtmonkey.model.PaymentSchedule;
-import com.kumasi.debtmonkey.model.jpa.PaymentScheduleEntity;
-import java.util.Date;
+import org.springframework.stereotype.Component;
+
 import com.kumasi.debtmonkey.business.service.PaymentScheduleService;
 import com.kumasi.debtmonkey.business.service.mapping.PaymentScheduleServiceMapper;
+import com.kumasi.debtmonkey.model.PaymentSchedule;
+import com.kumasi.debtmonkey.model.jpa.PaymentScheduleEntity;
 import com.kumasi.debtmonkey.persistence.PersistenceServiceProvider;
 import com.kumasi.debtmonkey.persistence.services.PaymentSchedulePersistence;
-import org.springframework.stereotype.Component;
 
 /**
  * Implementation of PaymentScheduleService
  */
 @Component
-public class PaymentScheduleServiceImpl implements PaymentScheduleService {
-
+public class PaymentScheduleServiceImpl implements PaymentScheduleService {	
+	
 	private PaymentSchedulePersistence paymentSchedulePersistence;
 
 	@Resource

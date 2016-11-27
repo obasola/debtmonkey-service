@@ -28,66 +28,66 @@ import com.kumasi.debtmonkey.web.listitem.PaymentScheduleListItem;
 @Controller
 public class PaymentScheduleRestController {
 
-	@Resource
-	private PaymentScheduleService paymentScheduleService;
-	
-	@RequestMapping( value="/items/paymentSchedule",
-			method = RequestMethod.GET,
-			produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(HttpStatus.OK)
-	@ResponseBody
-	public List<PaymentScheduleListItem> findAllAsListItems() {
-		List<PaymentSchedule> list = paymentScheduleService.findAll();
-		List<PaymentScheduleListItem> items = new LinkedList<PaymentScheduleListItem>();
-		for ( PaymentSchedule paymentSchedule : list ) {
-			items.add(new PaymentScheduleListItem( paymentSchedule ) );
-		}
-		return items;
-	}
-	
-	@RequestMapping( value="/paymentSchedule",
-			method = RequestMethod.GET,
-			produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(HttpStatus.OK)
-	@ResponseBody
-	public List<PaymentSchedule> findAll() {
-		return paymentScheduleService.findAll();
-	}
+    @Resource
+    private PaymentScheduleService paymentScheduleService;
 
-	@RequestMapping( value="/paymentSchedule/{id}",
-			method = RequestMethod.GET,
-			produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/items/paymentSchedule",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
-	@ResponseBody
-	public PaymentSchedule findOne(@PathVariable("id") Integer id) {
-		return paymentScheduleService.findById(id);
-	}
-	
-	@RequestMapping( value="/paymentSchedule",
-			method = RequestMethod.POST,
-			produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(HttpStatus.OK)
-	@ResponseBody
-	public PaymentSchedule create(@RequestBody PaymentSchedule paymentSchedule) {
-		return paymentScheduleService.create(paymentSchedule);
-	}
+    @ResponseBody
+    public List<PaymentScheduleListItem> findAllAsListItems() {
+        List<PaymentSchedule> list = paymentScheduleService.findAll();
+        List<PaymentScheduleListItem> items = new LinkedList<PaymentScheduleListItem>();
+        for (PaymentSchedule paymentSchedule : list) {
+            items.add(new PaymentScheduleListItem(paymentSchedule));
+        }
+        return items;
+    }
 
-	@RequestMapping( value="/paymentSchedule/{id}",
-			method = RequestMethod.PUT,
-			produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/paymentSchedule",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
-	@ResponseBody
-	public PaymentSchedule update(@PathVariable("id") Integer id, @RequestBody PaymentSchedule paymentSchedule) {
-		return paymentScheduleService.update(paymentSchedule);
-	}
+    @ResponseBody
+    public List<PaymentSchedule> findAll() {
+        return paymentScheduleService.findAll();
+    }
 
-	@RequestMapping( value="/paymentSchedule/{id}",
-			method = RequestMethod.DELETE,
-			produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/paymentSchedule/{id}",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
-	@ResponseBody
-	public void delete(@PathVariable("id") Integer id) {
-		paymentScheduleService.delete(id);
-	}
-	
+    @ResponseBody
+    public PaymentSchedule findOne(@PathVariable("id") Integer id) {
+        return paymentScheduleService.findById(id);
+    }
+
+    @RequestMapping(value = "/paymentSchedule",
+            method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public PaymentSchedule create(@RequestBody PaymentSchedule paymentSchedule) {
+        return paymentScheduleService.create(paymentSchedule);
+    }
+
+    @RequestMapping(value = "/paymentSchedule/{id}",
+            method = RequestMethod.PUT,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public PaymentSchedule update(@PathVariable("id") Integer id, @RequestBody PaymentSchedule paymentSchedule) {
+        return paymentScheduleService.update(paymentSchedule);
+    }
+
+    @RequestMapping(value = "/paymentSchedule/{id}",
+            method = RequestMethod.DELETE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public void delete(@PathVariable("id") Integer id) {
+        paymentScheduleService.delete(id);
+    }
+
 }

@@ -24,6 +24,9 @@ public class PaymentScheduleCalculatorImpl implements PaymentScheduleCalculator 
     private final int THIRTY_DAYS = 30;
     
     public Date getNextPaymentDate(Date currDate) throws Exception {
+    	if(currDate == null) {
+    		currDate = Calendar.getInstance().getTime();
+    	}
         calendar.setTime(currDate);
         calendar.add(Calendar.DATE, THIRTY_DAYS);
         return calendar.getTime();

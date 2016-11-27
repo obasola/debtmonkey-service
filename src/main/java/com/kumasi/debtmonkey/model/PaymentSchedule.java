@@ -4,16 +4,21 @@
  */
 package com.kumasi.debtmonkey.model;
 
+import com.kumasi.debtmonkey.business.service.PaymentScheduleCalculator;
 import java.io.Serializable;
 
 import javax.validation.constraints.*;
 
 import java.util.Date;
+import org.jboss.logging.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class PaymentSchedule implements Serializable {
-
+    private Logger logger = Logger.getLogger(PaymentSchedule.class);
     private static final long serialVersionUID = 1L;
 
+    @Autowired
+    private PaymentScheduleCalculator calculator;
     //----------------------------------------------------------------------
     // ENTITY PRIMARY KEY ( BASED ON A SINGLE FIELD )
     //----------------------------------------------------------------------
@@ -27,6 +32,8 @@ public class PaymentSchedule implements Serializable {
     private Date nextPaymentDue;
 
 
+    private Date dateLastPayment;
+    
     private Double balanceDue;
 
     @NotNull
@@ -48,10 +55,18 @@ public class PaymentSchedule implements Serializable {
         return this.id;
     }
 
-
+    
     //----------------------------------------------------------------------
     // GETTERS & SETTERS FOR FIELDS
     //----------------------------------------------------------------------
+
+    public Date getDateLastPayment() {        
+        return dateLastPayment;
+    }
+    public void setDateLastPayment(Date calcDate) {        
+        dateLastPayment = calcDate;
+    }
+    
     public void setNextPaymentDue( Date nextPaymentDue ) {
         this.nextPaymentDue = nextPaymentDue;
     }
@@ -97,7 +112,6 @@ public class PaymentSchedule implements Serializable {
         sb.append("|");
         sb.append(autoPayment);
         return sb.toString(); 
-    } 
-
+    }     
 
 }
