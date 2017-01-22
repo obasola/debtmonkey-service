@@ -24,12 +24,14 @@ public class PaymentScheduleCalculatorImpl implements PaymentScheduleCalculator 
     private final int THIRTY_DAYS = 30;
     
     public Date getNextPaymentDate(Date currDate) throws Exception {
+    	Calendar calendar = Calendar.getInstance();
     	if(currDate == null) {
     		currDate = Calendar.getInstance().getTime();
     	}
         calendar.setTime(currDate);
         calendar.add(Calendar.DATE, THIRTY_DAYS);
-        return calendar.getTime();
+        String newDate = df.format(calendar.getTime());
+        return df.parse(newDate);        
     }
     
     public String getNextPaymentDate(String dateStr) throws Exception {

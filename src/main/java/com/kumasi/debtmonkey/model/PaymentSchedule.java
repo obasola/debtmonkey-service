@@ -39,6 +39,7 @@ public class PaymentSchedule implements Serializable {
     @NotNull
     private Integer accountId;
 
+    private String accountName;
 
     private Byte autoPayment;
 
@@ -95,6 +96,20 @@ public class PaymentSchedule implements Serializable {
         return this.autoPayment;
     }
 
+    /**
+     * @return the accountName
+     */
+    public String getAccountName() {
+        return accountName;
+    }
+
+    /**
+     * @param accountName the accountName to set
+     */
+    public void setAccountName(String accountName) {
+        this.accountName = accountName;
+    }
+
 
     //----------------------------------------------------------------------
     // toString METHOD
@@ -114,4 +129,5 @@ public class PaymentSchedule implements Serializable {
         return sb.toString(); 
     }     
 
+    
 }

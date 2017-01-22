@@ -44,6 +44,9 @@ public class PaymentScheduleServiceImpl implements PaymentScheduleService {
 		List<PaymentScheduleEntity> entities = paymentSchedulePersistence.loadAll();
 		List<PaymentSchedule> beans = new ArrayList<PaymentSchedule>();
 		for(PaymentScheduleEntity entity : entities) {
+                    if(entity.getAccount().getDateClosed() != null) {
+                        continue;
+                    }
 			beans.add(paymentScheduleServiceMapper.mapPaymentScheduleEntityToPaymentSchedule(entity));
 		}
 		return beans;
@@ -56,9 +59,7 @@ public class PaymentScheduleServiceImpl implements PaymentScheduleService {
 
 	@Override
 	public PaymentSchedule create(PaymentSchedule paymentSchedule) {
-		if(paymentSchedulePersistence.load(paymentSchedule.getId()) != null) {
-			throw new IllegalStateException("already.exists");
-		}
+         
 		PaymentScheduleEntity paymentScheduleEntity = new PaymentScheduleEntity();
 		paymentScheduleServiceMapper.mapPaymentScheduleToPaymentScheduleEntity(paymentSchedule, paymentScheduleEntity);
 		PaymentScheduleEntity paymentScheduleEntitySaved = paymentSchedulePersistence.save(paymentScheduleEntity);

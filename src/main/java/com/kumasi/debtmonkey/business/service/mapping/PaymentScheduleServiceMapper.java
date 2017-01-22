@@ -52,6 +52,7 @@ public class PaymentScheduleServiceMapper extends AbstractServiceMapper {
 		if(paymentScheduleEntity.getAccount() != null) {
 			paymentSchedule.setAccountId(paymentScheduleEntity.getAccount().getId());			
 			paymentSchedule.setDateLastPayment(paymentScheduleEntity.getAccount().getDateLastPayment());
+                        paymentSchedule.setAccountName(paymentScheduleEntity.getAccount().getAccountName());
 			computeNextPaymentDate(paymentSchedule);
 		}
 		return paymentSchedule;
