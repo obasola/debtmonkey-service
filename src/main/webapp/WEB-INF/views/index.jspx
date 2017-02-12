@@ -10,7 +10,15 @@
 		</h3>
       
 		<ul class="entity">
+            <li><a href="account">Account</a></li>
+            <li><a href="accountAddress">AccountAddress</a></li>
+            <li><a href="accountType">AccountType</a></li>
+            <li><a href="addressType">AddressType</a></li>
+            <li><a href="paymentHistory">PaymentHistory</a></li>
             <li><a href="paymentSchedule">PaymentSchedule</a></li>
+            <li><a href="role">Role</a></li>
+            <li><a href="userAccount">UserAccount</a></li>
+            <li><a href="userRole">UserRole</a></li>
 	    </ul>
 
     </div> <!-- /container -->

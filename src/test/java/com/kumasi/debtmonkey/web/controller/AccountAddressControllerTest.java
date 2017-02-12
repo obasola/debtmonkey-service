@@ -15,18 +15,22 @@ import javax.servlet.http.HttpServletRequest;
 
 //--- Entities
 import com.kumasi.debtmonkey.model.AccountAddress;
+import com.kumasi.debtmonkey.model.AddressType;
 import com.kumasi.debtmonkey.model.Account;
 import com.kumasi.debtmonkey.model.AccountType;
 import com.kumasi.debtmonkey.test.AccountAddressFactoryForTest;
+import com.kumasi.debtmonkey.test.AddressTypeFactoryForTest;
 import com.kumasi.debtmonkey.test.AccountFactoryForTest;
 import com.kumasi.debtmonkey.test.AccountTypeFactoryForTest;
 
 //--- Services 
 import com.kumasi.debtmonkey.business.service.AccountAddressService;
+import com.kumasi.debtmonkey.business.service.AddressTypeService;
 import com.kumasi.debtmonkey.business.service.AccountService;
 import com.kumasi.debtmonkey.business.service.AccountTypeService;
 
 //--- List Items 
+import com.kumasi.debtmonkey.web.listitem.AddressTypeListItem;
 import com.kumasi.debtmonkey.web.listitem.AccountListItem;
 import com.kumasi.debtmonkey.web.listitem.AccountTypeListItem;
 
@@ -57,18 +61,29 @@ public class AccountAddressControllerTest {
 	@Mock
 	private MessageSource messageSource;
 	@Mock
+	private AddressTypeService addressTypeService; // Injected by Spring
+	@Mock
 	private AccountService accountService; // Injected by Spring
 	@Mock
 	private AccountTypeService accountTypeService; // Injected by Spring
 
 	private AccountAddressFactoryForTest accountAddressFactoryForTest = new AccountAddressFactoryForTest();
+	private AddressTypeFactoryForTest addressTypeFactoryForTest = new AddressTypeFactoryForTest();
 	private AccountFactoryForTest accountFactoryForTest = new AccountFactoryForTest();
 	private AccountTypeFactoryForTest accountTypeFactoryForTest = new AccountTypeFactoryForTest();
 
+	List<AddressType> addressTypes = new ArrayList<AddressType>();
 	List<Account> accounts = new ArrayList<Account>();
 	List<AccountType> accountTypes = new ArrayList<AccountType>();
 
 	private void givenPopulateModel() {
+		AddressType addressType1 = addressTypeFactoryForTest.newAddressType();
+		AddressType addressType2 = addressTypeFactoryForTest.newAddressType();
+		List<AddressType> addressTypes = new ArrayList<AddressType>();
+		addressTypes.add(addressType1);
+		addressTypes.add(addressType2);
+		when(addressTypeService.findAll()).thenReturn(addressTypes);
+
 		Account account1 = accountFactoryForTest.newAccount();
 		Account account2 = accountFactoryForTest.newAccount();
 		List<Account> accounts = new ArrayList<Account>();
@@ -122,6 +137,10 @@ public class AccountAddressControllerTest {
 		assertEquals("/accountAddress/create", modelMap.get("saveAction"));
 		
 		@SuppressWarnings("unchecked")
+		List<AddressTypeListItem> addressTypeListItems = (List<AddressTypeListItem>) modelMap.get("listOfAddressTypeItems");
+		assertEquals(2, addressTypeListItems.size());
+		
+		@SuppressWarnings("unchecked")
 		List<AccountListItem> accountListItems = (List<AccountListItem>) modelMap.get("listOfAccountItems");
 		assertEquals(2, accountListItems.size());
 		
@@ -159,6 +178,9 @@ public class AccountAddressControllerTest {
 		
 		List<AccountTypeListItem> accountTypeListItems = (List<AccountTypeListItem>) modelMap.get("listOfAccountTypeItems");
 		assertEquals(2, accountTypeListItems.size());
+		
+		List<AddressTypeListItem> addressTypeListItems = (List<AddressTypeListItem>) modelMap.get("listOfAddressTypeItems");
+		assertEquals(2, addressTypeListItems.size());
 		
 	}
 	
@@ -216,6 +238,10 @@ public class AccountAddressControllerTest {
 		assertEquals("/accountAddress/create", modelMap.get("saveAction"));
 		
 		@SuppressWarnings("unchecked")
+		List<AddressTypeListItem> addressTypeListItems = (List<AddressTypeListItem>) modelMap.get("listOfAddressTypeItems");
+		assertEquals(2, addressTypeListItems.size());
+		
+		@SuppressWarnings("unchecked")
 		List<AccountListItem> accountListItems = (List<AccountListItem>) modelMap.get("listOfAccountItems");
 		assertEquals(2, accountListItems.size());
 		
@@ -255,6 +281,10 @@ public class AccountAddressControllerTest {
 		assertEquals("/accountAddress/create", modelMap.get("saveAction"));
 		
 		Mockito.verify(messageHelper).addException(model, "accountAddress.error.create", exception);
+		
+		@SuppressWarnings("unchecked")
+		List<AddressTypeListItem> addressTypeListItems = (List<AddressTypeListItem>) modelMap.get("listOfAddressTypeItems");
+		assertEquals(2, addressTypeListItems.size());
 		
 		@SuppressWarnings("unchecked")
 		List<AccountListItem> accountListItems = (List<AccountListItem>) modelMap.get("listOfAccountItems");
@@ -330,6 +360,10 @@ public class AccountAddressControllerTest {
 		List<AccountTypeListItem> accountTypeListItems = (List<AccountTypeListItem>) modelMap.get("listOfAccountTypeItems");
 		assertEquals(2, accountTypeListItems.size());
 		
+		@SuppressWarnings("unchecked")
+		List<AddressTypeListItem> addressTypeListItems = (List<AddressTypeListItem>) modelMap.get("listOfAddressTypeItems");
+		assertEquals(2, addressTypeListItems.size());
+		
 	}
 
 	@Test
@@ -370,6 +404,10 @@ public class AccountAddressControllerTest {
 		@SuppressWarnings("unchecked")
 		List<AccountTypeListItem> accountTypeListItems = (List<AccountTypeListItem>) modelMap.get("listOfAccountTypeItems");
 		assertEquals(2, accountTypeListItems.size());
+		
+		@SuppressWarnings("unchecked")
+		List<AddressTypeListItem> addressTypeListItems = (List<AddressTypeListItem>) modelMap.get("listOfAddressTypeItems");
+		assertEquals(2, addressTypeListItems.size());
 		
 	}
 	

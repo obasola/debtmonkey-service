@@ -15,15 +15,19 @@ import javax.servlet.http.HttpServletRequest;
 
 //--- Entities
 import com.kumasi.debtmonkey.model.Account;
+import com.kumasi.debtmonkey.model.UserAccount;
 import com.kumasi.debtmonkey.model.AccountType;
 import com.kumasi.debtmonkey.test.AccountFactoryForTest;
+import com.kumasi.debtmonkey.test.UserAccountFactoryForTest;
 import com.kumasi.debtmonkey.test.AccountTypeFactoryForTest;
 
 //--- Services 
 import com.kumasi.debtmonkey.business.service.AccountService;
+import com.kumasi.debtmonkey.business.service.UserAccountService;
 import com.kumasi.debtmonkey.business.service.AccountTypeService;
 
 //--- List Items 
+import com.kumasi.debtmonkey.web.listitem.UserAccountListItem;
 import com.kumasi.debtmonkey.web.listitem.AccountTypeListItem;
 
 import com.kumasi.debtmonkey.web.common.Message;
@@ -53,14 +57,25 @@ public class AccountControllerTest {
 	@Mock
 	private MessageSource messageSource;
 	@Mock
+	private UserAccountService userAccountService; // Injected by Spring
+	@Mock
 	private AccountTypeService accountTypeService; // Injected by Spring
 
 	private AccountFactoryForTest accountFactoryForTest = new AccountFactoryForTest();
+	private UserAccountFactoryForTest userAccountFactoryForTest = new UserAccountFactoryForTest();
 	private AccountTypeFactoryForTest accountTypeFactoryForTest = new AccountTypeFactoryForTest();
 
+	List<UserAccount> userAccounts = new ArrayList<UserAccount>();
 	List<AccountType> accountTypes = new ArrayList<AccountType>();
 
 	private void givenPopulateModel() {
+		UserAccount userAccount1 = userAccountFactoryForTest.newUserAccount();
+		UserAccount userAccount2 = userAccountFactoryForTest.newUserAccount();
+		List<UserAccount> userAccounts = new ArrayList<UserAccount>();
+		userAccounts.add(userAccount1);
+		userAccounts.add(userAccount2);
+		when(userAccountService.findAll()).thenReturn(userAccounts);
+
 		AccountType accountType1 = accountTypeFactoryForTest.newAccountType();
 		AccountType accountType2 = accountTypeFactoryForTest.newAccountType();
 		List<AccountType> accountTypes = new ArrayList<AccountType>();
@@ -107,6 +122,10 @@ public class AccountControllerTest {
 		assertEquals("/account/create", modelMap.get("saveAction"));
 		
 		@SuppressWarnings("unchecked")
+		List<UserAccountListItem> userAccountListItems = (List<UserAccountListItem>) modelMap.get("listOfUserAccountItems");
+		assertEquals(2, userAccountListItems.size());
+		
+		@SuppressWarnings("unchecked")
 		List<AccountTypeListItem> accountTypeListItems = (List<AccountTypeListItem>) modelMap.get("listOfAccountTypeItems");
 		assertEquals(2, accountTypeListItems.size());
 		
@@ -137,6 +156,9 @@ public class AccountControllerTest {
 		
 		List<AccountTypeListItem> accountTypeListItems = (List<AccountTypeListItem>) modelMap.get("listOfAccountTypeItems");
 		assertEquals(2, accountTypeListItems.size());
+		
+		List<UserAccountListItem> userAccountListItems = (List<UserAccountListItem>) modelMap.get("listOfUserAccountItems");
+		assertEquals(2, userAccountListItems.size());
 		
 	}
 	
@@ -194,6 +216,10 @@ public class AccountControllerTest {
 		assertEquals("/account/create", modelMap.get("saveAction"));
 		
 		@SuppressWarnings("unchecked")
+		List<UserAccountListItem> userAccountListItems = (List<UserAccountListItem>) modelMap.get("listOfUserAccountItems");
+		assertEquals(2, userAccountListItems.size());
+		
+		@SuppressWarnings("unchecked")
 		List<AccountTypeListItem> accountTypeListItems = (List<AccountTypeListItem>) modelMap.get("listOfAccountTypeItems");
 		assertEquals(2, accountTypeListItems.size());
 		
@@ -229,6 +255,10 @@ public class AccountControllerTest {
 		assertEquals("/account/create", modelMap.get("saveAction"));
 		
 		Mockito.verify(messageHelper).addException(model, "account.error.create", exception);
+		
+		@SuppressWarnings("unchecked")
+		List<UserAccountListItem> userAccountListItems = (List<UserAccountListItem>) modelMap.get("listOfUserAccountItems");
+		assertEquals(2, userAccountListItems.size());
 		
 		@SuppressWarnings("unchecked")
 		List<AccountTypeListItem> accountTypeListItems = (List<AccountTypeListItem>) modelMap.get("listOfAccountTypeItems");
@@ -296,6 +326,10 @@ public class AccountControllerTest {
 		List<AccountTypeListItem> accountTypeListItems = (List<AccountTypeListItem>) modelMap.get("listOfAccountTypeItems");
 		assertEquals(2, accountTypeListItems.size());
 		
+		@SuppressWarnings("unchecked")
+		List<UserAccountListItem> userAccountListItems = (List<UserAccountListItem>) modelMap.get("listOfUserAccountItems");
+		assertEquals(2, userAccountListItems.size());
+		
 	}
 
 	@Test
@@ -332,6 +366,10 @@ public class AccountControllerTest {
 		@SuppressWarnings("unchecked")
 		List<AccountTypeListItem> accountTypeListItems = (List<AccountTypeListItem>) modelMap.get("listOfAccountTypeItems");
 		assertEquals(2, accountTypeListItems.size());
+		
+		@SuppressWarnings("unchecked")
+		List<UserAccountListItem> userAccountListItems = (List<UserAccountListItem>) modelMap.get("listOfUserAccountItems");
+		assertEquals(2, userAccountListItems.size());
 		
 	}
 	
