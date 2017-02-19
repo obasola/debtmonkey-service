@@ -3,6 +3,15 @@
     
 	<persistence-unit name="persistence-unit1" transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<class>net.kumasi.debtmonkey.domain.jpa.AccountEntity</class>
+		<class>net.kumasi.debtmonkey.domain.jpa.AccountAddressEntity</class>
+		<class>net.kumasi.debtmonkey.domain.jpa.AccountTypeEntity</class>
+		<class>net.kumasi.debtmonkey.domain.jpa.AddressTypeEntity</class>
+		<class>net.kumasi.debtmonkey.domain.jpa.PaymentHistoryEntity</class>
+		<class>net.kumasi.debtmonkey.domain.jpa.PaymentScheduleEntity</class>
+		<class>net.kumasi.debtmonkey.domain.jpa.UserAccountEntity</class>
+		<class>net.kumasi.debtmonkey.domain.jpa.UserRoleEntity</class>
+		<class>net.kumasi.debtmonkey.domain.jpa.RoleEntity</class>
 		<properties>
 			<!-- Database configuration -->
 			<property name="hibernate.connection.driver_class"  value="com.mysql.jdbc.Driver"/>

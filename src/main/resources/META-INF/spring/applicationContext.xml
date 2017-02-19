@@ -11,6 +11,6 @@
 
 	<context:annotation-config />
 
-	<context:component-scan base-package="com.kumasi.debtmonkey" />
+	<context:component-scan base-package="net.kumasi.debtmonkey" />
 
 </beans>
