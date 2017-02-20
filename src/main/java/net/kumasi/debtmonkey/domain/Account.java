@@ -58,7 +58,8 @@ public class Account implements Serializable {
     private Integer userAccountId;
 
 
-    private Integer accountAddressId;
+    private AccountAddress accountAddress;
+
 
 
 
@@ -154,19 +155,26 @@ public class Account implements Serializable {
         return this.userAccountId;
     }
 
-    public void setAccountAddressId( Integer accountAddressId ) {
-        this.accountAddressId = accountAddressId;
-    }
-    public Integer getAccountAddressId() {
-        return this.accountAddressId;
-    }
-
+    
 
     //----------------------------------------------------------------------
     // toString METHOD
     //----------------------------------------------------------------------
  
-        public String toString() { 
+    public AccountAddress getAccountAddress() {
+		return accountAddress;
+	}
+
+	public void setAccountAddress(AccountAddress accountAddress) {
+		this.accountAddress = accountAddress;
+	}
+
+	
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+		public String toString() { 
         StringBuffer sb = new StringBuffer(); 
         sb.append(id);
         sb.append("|");
@@ -192,7 +200,7 @@ public class Account implements Serializable {
         sb.append("|");
         sb.append(userAccountId);
         sb.append("|");
-        sb.append(accountAddressId);
+        sb.append(accountAddress);
         return sb.toString(); 
     } 
 

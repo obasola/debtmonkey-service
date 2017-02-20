@@ -11,12 +11,13 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
-import org.springframework.stereotype.Component;
+
 import net.kumasi.debtmonkey.domain.Account;
-import net.kumasi.debtmonkey.domain.jpa.AccountEntity;
+import net.kumasi.debtmonkey.domain.AccountAddress;
 import net.kumasi.debtmonkey.domain.jpa.AccountAddressEntity;
-import net.kumasi.debtmonkey.domain.jpa.UserAccountEntity;
+import net.kumasi.debtmonkey.domain.jpa.AccountEntity;
 import net.kumasi.debtmonkey.domain.jpa.AccountTypeEntity;
+import net.kumasi.debtmonkey.domain.jpa.UserAccountEntity;
 import net.kumasi.debtmonkey.test.MockValues;
 
 /**
@@ -79,7 +80,7 @@ public class AccountServiceMapperTest {
 		assertEquals(accountEntity.getDateCreated(), account.getDateCreated());
 		assertEquals(accountEntity.getDateModified(), account.getDateModified());
 		assertEquals(accountEntity.getAutoPayment(), account.getAutoPayment());
-		assertEquals(accountEntity.getAccountAddress().getId(), account.getAccountAddressId());
+		assertEquals(accountEntity.getAccountAddress().getId(), account.getAccountAddress().getId());
 		assertEquals(accountEntity.getUserAccount().getId(), account.getUserAccountId());
 		assertEquals(accountEntity.getAccountType().getId(), account.getAccountTypeId());
 	}
@@ -91,6 +92,7 @@ public class AccountServiceMapperTest {
 	public void testMapAccountToAccountEntity() {
 		// Given
 		Account account = new Account();
+		account.setAccountAddress(new AccountAddress() );
 		account.setAccountName(mockValues.nextString(45));
 		account.setOriginalBalance(mockValues.nextDouble());
 		account.setCurrentBalance(mockValues.nextDouble());
@@ -100,7 +102,7 @@ public class AccountServiceMapperTest {
 		account.setDateCreated(mockValues.nextDate());
 		account.setDateModified(mockValues.nextDate());
 		account.setAutoPayment(mockValues.nextByte());
-		account.setAccountAddressId(mockValues.nextInteger());
+		account.getAccountAddress().setId(mockValues.nextInteger());
 		account.setUserAccountId(mockValues.nextInteger());
 		account.setAccountTypeId(mockValues.nextInteger());
 
@@ -119,7 +121,7 @@ public class AccountServiceMapperTest {
 		assertEquals(account.getDateCreated(), accountEntity.getDateCreated());
 		assertEquals(account.getDateModified(), accountEntity.getDateModified());
 		assertEquals(account.getAutoPayment(), accountEntity.getAutoPayment());
-		assertEquals(account.getAccountAddressId(), accountEntity.getAccountAddress().getId());
+		assertEquals(account.getAccountAddress().getId(), accountEntity.getAccountAddress().getId());
 		assertEquals(account.getUserAccountId(), accountEntity.getUserAccount().getId());
 		assertEquals(account.getAccountTypeId(), accountEntity.getAccountType().getId());
 	}

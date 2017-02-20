@@ -5,9 +5,9 @@
 	<artifactId>debtmonkey-service</artifactId>
 	<version>0.1</version>
 	<packaging>war</packaging>
-	
-	<dependencies>
 
+	<dependencies>
+		
 		<!-- Add the JDBC driver here -->
 		<dependency>
 			<groupId>mysql</groupId>
@@ -47,12 +47,8 @@
 		</dependency>
 
 		<!-- Dependencies for Unit Testing -->
-		<!-- dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit-dep</artifactId>
-			<version>4.11</version>
-			<scope>test</scope>
-		</dependency -->
+		<!-- dependency> <groupId>junit</groupId> <artifactId>junit-dep</artifactId> 
+			<version>4.11</version> <scope>test</scope> </dependency -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -104,7 +100,7 @@
 		<dependency>
 			<groupId>org.modelmapper</groupId>
 			<artifactId>modelmapper</artifactId>
-			<version>0.6.2</version>
+			<version>0.7.5</version>
 		</dependency>
 
 		<!-- Insert contents of : pom_dependencies_web.txt -->
@@ -171,5 +167,5 @@
 			</plugin>
 		</plugins>
 	</build>
-	
+
 </project>

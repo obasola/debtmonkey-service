@@ -1,5 +1,7 @@
 package net.kumasi.debtmonkey.test;
 
+import net.kumasi.debtmonkey.domain.Role;
+import net.kumasi.debtmonkey.domain.UserAccount;
 import net.kumasi.debtmonkey.domain.UserRole;
 
 public class UserRoleFactoryForTest {
@@ -12,8 +14,10 @@ public class UserRoleFactoryForTest {
 		Integer roleRoleId = mockValues.nextInteger();
 
 		UserRole userRole = new UserRole();
-		userRole.setUserAccountId(userAccountId);
-		userRole.setRoleRoleId(roleRoleId);
+		userRole.setRole(new Role());
+		userRole.setUserAccount(new UserAccount());
+		userRole.getUserAccount().setId(userAccountId);
+		userRole.getRole().setRoleId(roleRoleId);
 		return userRole;
 	}
 	

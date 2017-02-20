@@ -17,9 +17,12 @@ public class UserRole implements Serializable {
     // ENTITY PRIMARY KEY ( BASED ON A SINGLE FIELD )
     //----------------------------------------------------------------------
     @NotNull
-    private Integer userAccountId;
+    private UserAccount userAccount;
     @NotNull
-    private Integer roleRoleId;
+    private Role role;
+    
+    private String userFullName;
+    private String roleName;
 
     //----------------------------------------------------------------------
     // ENTITY DATA FIELDS 
@@ -29,23 +32,7 @@ public class UserRole implements Serializable {
     //----------------------------------------------------------------------
     // GETTER & SETTER FOR THE KEY FIELD
     //----------------------------------------------------------------------
-    public void setUserAccountId( Integer userAccountId ) {
-        this.userAccountId = userAccountId ;
-    }
-
-    public Integer getUserAccountId() {
-        return this.userAccountId;
-    }
-
-    public void setRoleRoleId( Integer roleRoleId ) {
-        this.roleRoleId = roleRoleId ;
-    }
-
-    public Integer getRoleRoleId() {
-        return this.roleRoleId;
-    }
-
-
+   
     //----------------------------------------------------------------------
     // GETTERS & SETTERS FOR FIELDS
     //----------------------------------------------------------------------
@@ -54,12 +41,44 @@ public class UserRole implements Serializable {
     // toString METHOD
     //----------------------------------------------------------------------
  
-        public String toString() { 
-        StringBuffer sb = new StringBuffer(); 
-        sb.append(userAccountId);
-        sb.append("|");
-        sb.append(roleRoleId);
-        return sb.toString(); 
+        public String getUserFullName() {
+		return userFullName;
+	}
+
+	public UserAccount getUserAccount() {
+			return userAccount;
+		}
+
+		public void setUserAccount(UserAccount userAccount) {
+			this.userAccount = userAccount;
+		}
+
+		public Role getRole() {
+			return role;
+		}
+
+		public void setRole(Role role) {
+			this.role = role;
+		}
+
+	public void setUserFullName(String userFullName) {
+		this.userFullName = userFullName;
+	}
+
+	public String getRoleName() {
+		return roleName;
+	}
+
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+		public String toString() { 
+        return role.getRoleName()+" "+userAccount.getFirstName()+" "+userAccount.getLastName();
     } 
 
 

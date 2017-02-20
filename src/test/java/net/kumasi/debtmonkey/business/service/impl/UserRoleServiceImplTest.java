@@ -64,8 +64,8 @@ public class UserRoleServiceImplTest {
 		UserRole userRoleFound = userRoleService.findById(userAccountId, roleRoleId);
 
 		// Then
-		assertEquals(userRole.getUserAccountId(),userRoleFound.getUserAccountId());
-		assertEquals(userRole.getRoleRoleId(),userRoleFound.getRoleRoleId());
+		assertEquals(userRole.getUserAccount(),userRoleFound.getUserAccount());
+		assertEquals(userRole.getRole(),userRoleFound.getRole());
 	}
 
 	@Test
@@ -97,7 +97,7 @@ public class UserRoleServiceImplTest {
 		UserRole userRole = userRoleFactoryForTest.newUserRole();
 
 		UserRoleEntity userRoleEntity = userRoleEntityFactoryForTest.newUserRoleEntity();
-		when(userRolePersistenceJPA.load(userRole.getUserAccountId(), userRole.getRoleRoleId())).thenReturn(null);
+		when(userRolePersistenceJPA.load(userRole.getUserAccount().getId(), userRole.getRole().getRoleId())).thenReturn(null);
 		
 		userRoleEntity = new UserRoleEntity();
 		userRoleServiceMapper.mapUserRoleToUserRoleEntity(userRole, userRoleEntity);
@@ -119,7 +119,7 @@ public class UserRoleServiceImplTest {
 		UserRole userRole = userRoleFactoryForTest.newUserRole();
 
 		UserRoleEntity userRoleEntity = userRoleEntityFactoryForTest.newUserRoleEntity();
-		when(userRolePersistenceJPA.load(userRole.getUserAccountId(), userRole.getRoleRoleId())).thenReturn(userRoleEntity);
+		when(userRolePersistenceJPA.load(userRole.getUserAccount().getId(), userRole.getRole().getRoleId())).thenReturn(userRoleEntity);
 
 		// When
 		Exception exception = null;
@@ -140,7 +140,7 @@ public class UserRoleServiceImplTest {
 		UserRole userRole = userRoleFactoryForTest.newUserRole();
 
 		UserRoleEntity userRoleEntity = userRoleEntityFactoryForTest.newUserRoleEntity();
-		when(userRolePersistenceJPA.load(userRole.getUserAccountId(), userRole.getRoleRoleId())).thenReturn(userRoleEntity);
+		when(userRolePersistenceJPA.load(userRole.getUserAccount().getId(), userRole.getRole().getRoleId())).thenReturn(userRoleEntity);
 		
 		UserRoleEntity userRoleEntitySaved = userRoleEntityFactoryForTest.newUserRoleEntity();
 		when(userRolePersistenceJPA.save(userRoleEntity)).thenReturn(userRoleEntitySaved);

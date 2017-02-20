@@ -7,11 +7,13 @@ package net.kumasi.debtmonkey.business.service.mapping;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.stereotype.Component;
+
 import net.kumasi.debtmonkey.domain.Account;
-import net.kumasi.debtmonkey.domain.jpa.AccountEntity;
+import net.kumasi.debtmonkey.domain.AccountAddress;
 import net.kumasi.debtmonkey.domain.jpa.AccountAddressEntity;
-import net.kumasi.debtmonkey.domain.jpa.UserAccountEntity;
+import net.kumasi.debtmonkey.domain.jpa.AccountEntity;
 import net.kumasi.debtmonkey.domain.jpa.AccountTypeEntity;
+import net.kumasi.debtmonkey.domain.jpa.UserAccountEntity;
 
 /**
  * Mapping between entity beans and display beans.
@@ -46,7 +48,8 @@ public class AccountServiceMapper extends AbstractServiceMapper {
 
 		//--- Link mapping ( link to AccountAddress )
 		if(accountEntity.getAccountAddress() != null) {
-			account.setAccountAddressId(accountEntity.getAccountAddress().getId());
+			AccountAddress acctAddress = map(accountEntity.getAccountAddress(), AccountAddress.class);
+			account.setAccountAddress(acctAddress);
 		}
 		//--- Link mapping ( link to UserAccount )
 		if(accountEntity.getUserAccount() != null) {
@@ -75,7 +78,7 @@ public class AccountServiceMapper extends AbstractServiceMapper {
 		//--- Link mapping ( link : account )
 		if( hasLinkToAccountAddress(account) ) {
 			AccountAddressEntity accountAddress1 = new AccountAddressEntity();
-			accountAddress1.setId( account.getAccountAddressId() );
+			accountAddress1.setId( account.getAccountAddress().getId() );
 			accountEntity.setAccountAddress( accountAddress1 );
 		} else {
 			accountEntity.setAccountAddress( null );
@@ -107,7 +110,7 @@ public class AccountServiceMapper extends AbstractServiceMapper {
 	 * @return boolean
 	 */
 	private boolean hasLinkToAccountAddress(Account account) {
-		if(account.getAccountAddressId() != null) {
+		if(account.getAccountAddress() != null && account.getAccountAddress().getId() != null) {
 			return true;
 		}
 		return false;

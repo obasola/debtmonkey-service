@@ -16,12 +16,12 @@ public class UserRoleListItem implements ListItem {
 		super();
 
 		this.value = ""
-			 + userRole.getUserAccountId()
-			 + "|"  + userRole.getRoleRoleId()
+			 + userRole.getUserAccount()
+			 + "|"  + userRole;
 		;
 
 		//TODO : Define here the attributes to be displayed as the label
-		this.label = userRole.getUserAccountId().toString();
+		this.label = userRole.getUserAccount().getFirstName()+" "+userRole.getUserAccount().getLastName();
 	}
 
 	@Override

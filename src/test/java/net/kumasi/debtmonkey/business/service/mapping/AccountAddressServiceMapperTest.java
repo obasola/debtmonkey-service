@@ -11,8 +11,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
-import org.springframework.stereotype.Component;
+
 import net.kumasi.debtmonkey.domain.AccountAddress;
+import net.kumasi.debtmonkey.domain.AddressType;
 import net.kumasi.debtmonkey.domain.jpa.AccountAddressEntity;
 import net.kumasi.debtmonkey.domain.jpa.AddressTypeEntity;
 import net.kumasi.debtmonkey.test.MockValues;
@@ -75,12 +76,13 @@ public class AccountAddressServiceMapperTest {
 	public void testMapAccountAddressToAccountAddressEntity() {
 		// Given
 		AccountAddress accountAddress = new AccountAddress();
+		accountAddress.setAddressType(new AddressType());
 		accountAddress.setAddressLine1(mockValues.nextString(45));
 		accountAddress.setAddressLine2(mockValues.nextString(45));
 		accountAddress.setCity(mockValues.nextString(45));
 		accountAddress.setState(mockValues.nextString(45));
 		accountAddress.setZipcode(mockValues.nextString(5));
-		accountAddress.setAddressTypeId(mockValues.nextInteger());
+		accountAddress.getAddressType().setId((mockValues.nextInteger()) );
 
 		AccountAddressEntity accountAddressEntity = new AccountAddressEntity();
 		

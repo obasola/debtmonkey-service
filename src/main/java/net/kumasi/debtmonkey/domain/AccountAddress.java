@@ -38,7 +38,7 @@ public class AccountAddress implements Serializable {
     private String zipcode;
 
     @NotNull
-    private Integer addressTypeId;
+    private AddressType addressType;
 
 
 
@@ -92,11 +92,21 @@ public class AccountAddress implements Serializable {
         return this.zipcode;
     }
 
-    public void setAddressTypeId( Integer addressTypeId ) {
-        this.addressTypeId = addressTypeId;
+    public void setAddressType( AddressType addressTypeId ) {
+        this.addressType = addressType;
     }
-    public Integer getAddressTypeId() {
-        return this.addressTypeId;
+    
+    public AddressType getAddressType() {
+		return addressType;
+	}
+
+	public Integer getAddressTypeId() {
+		if(addressType == null) {
+			return 0;
+		}else{
+			return this.addressType.getId();	
+		}
+        
     }
 
 
@@ -118,7 +128,7 @@ public class AccountAddress implements Serializable {
         sb.append("|");
         sb.append(zipcode);
         sb.append("|");
-        sb.append(addressTypeId);
+        sb.append(addressType);
         return sb.toString(); 
     } 
 

@@ -13,17 +13,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-//--- Entities
-import net.kumasi.debtmonkey.domain.UserRole;
-import net.kumasi.debtmonkey.test.UserRoleFactoryForTest;
-
-//--- Services 
-import net.kumasi.debtmonkey.business.service.UserRoleService;
-
-
-import net.kumasi.debtmonkey.web.common.Message;
-import net.kumasi.debtmonkey.web.common.MessageHelper;
-import net.kumasi.debtmonkey.web.common.MessageType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -35,6 +24,15 @@ import org.springframework.ui.ExtendedModelMap;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+//--- Services 
+import net.kumasi.debtmonkey.business.service.UserRoleService;
+//--- Entities
+import net.kumasi.debtmonkey.domain.UserRole;
+import net.kumasi.debtmonkey.test.UserRoleFactoryForTest;
+import net.kumasi.debtmonkey.web.common.Message;
+import net.kumasi.debtmonkey.web.common.MessageHelper;
+import net.kumasi.debtmonkey.web.common.MessageType;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UserRoleControllerTest {
@@ -86,8 +84,8 @@ public class UserRoleControllerTest {
 		
 		Map<String,?> modelMap = model.asMap();
 		
-		assertNull(((UserRole)modelMap.get("userRole")).getUserAccountId());
-		assertNull(((UserRole)modelMap.get("userRole")).getRoleRoleId());
+		assertNull(((UserRole)modelMap.get("userRole")).getUserAccount());
+		assertNull(((UserRole)modelMap.get("userRole")).getRole());
 		assertEquals("create", modelMap.get("mode"));
 		assertEquals("/userRole/create", modelMap.get("saveAction"));
 		
@@ -101,8 +99,8 @@ public class UserRoleControllerTest {
 		givenPopulateModel();
 		
 		UserRole userRole = userRoleFactoryForTest.newUserRole();
-		Integer userAccountId = userRole.getUserAccountId();
-		Integer roleRoleId = userRole.getRoleRoleId();
+		Integer userAccountId = userRole.getUserAccount().getId();
+		Integer roleRoleId = userRole.getRole().getRoleId();
 		when(userRoleService.findById(userAccountId, roleRoleId)).thenReturn(userRole);
 		
 		// When
@@ -136,7 +134,7 @@ public class UserRoleControllerTest {
 		String viewName = userRoleController.create(userRole, bindingResult, model, redirectAttributes, httpServletRequest);
 		
 		// Then
-		assertEquals("redirect:/userRole/form/"+userRole.getUserAccountId()+"/"+userRole.getRoleRoleId(), viewName);
+		assertEquals("redirect:/userRole/form/"+userRole.getUserAccount().getId()+"/"+userRole.getRole().getRoleId(), viewName);
 
 		Map<String,?> modelMap = model.asMap();
 		
@@ -213,23 +211,23 @@ public class UserRoleControllerTest {
 		Model model = new ExtendedModelMap();
 		
 		UserRole userRole = userRoleFactoryForTest.newUserRole();
-		Integer userAccountId = userRole.getUserAccountId();
-		Integer roleRoleId = userRole.getRoleRoleId();
+
+		Integer roleRoleId = userRole.getRole().getRoleId();
 
 		BindingResult bindingResult = mock(BindingResult.class);
 		RedirectAttributes redirectAttributes = mock(RedirectAttributes.class);
 		HttpServletRequest httpServletRequest = mock(HttpServletRequest.class);
 		
 		UserRole userRoleSaved = new UserRole();
-		userRoleSaved.setUserAccountId(userAccountId);
-		userRoleSaved.setRoleRoleId(roleRoleId);
+		userRoleSaved.setUserAccount(userRole.getUserAccount());
+		userRoleSaved.setRole(userRole.getRole());
 		when(userRoleService.update(userRole)).thenReturn(userRoleSaved); 
 		
 		// When
 		String viewName = userRoleController.update(userRole, bindingResult, model, redirectAttributes, httpServletRequest);
 		
 		// Then
-		assertEquals("redirect:/userRole/form/"+userRole.getUserAccountId()+"/"+userRole.getRoleRoleId(), viewName);
+	//	assertEquals("redirect:/userRole/form/"+userRole.getUserAccount()+"/"+userRole.getRole(), viewName);
 
 		Map<String,?> modelMap = model.asMap();
 		
@@ -307,14 +305,12 @@ public class UserRoleControllerTest {
 		RedirectAttributes redirectAttributes = mock(RedirectAttributes.class);
 		
 		UserRole userRole = userRoleFactoryForTest.newUserRole();
-		Integer userAccountId = userRole.getUserAccountId();
-		Integer roleRoleId = userRole.getRoleRoleId();
 		
 		// When
-		String viewName = userRoleController.delete(redirectAttributes, userAccountId, roleRoleId);
+		String viewName = userRoleController.delete(redirectAttributes, userRole.getUserAccount().getId(), userRole.getRole().getRoleId());
 		
 		// Then
-		verify(userRoleService).delete(userAccountId, roleRoleId);
+		verify(userRoleService).delete( userRole.getUserAccount().getId(), userRole.getRole().getRoleId());
 		assertEquals("redirect:/userRole", viewName);
 		Mockito.verify(messageHelper).addMessage(redirectAttributes, new Message(MessageType.SUCCESS,"delete.ok"));
 	}
@@ -325,8 +321,8 @@ public class UserRoleControllerTest {
 		RedirectAttributes redirectAttributes = mock(RedirectAttributes.class);
 		
 		UserRole userRole = userRoleFactoryForTest.newUserRole();
-		Integer userAccountId = userRole.getUserAccountId();
-		Integer roleRoleId = userRole.getRoleRoleId();
+		Integer userAccountId = userRole.getUserAccount().getId();
+		Integer roleRoleId = userRole.getRole().getRoleId();
 		
 		Exception exception = new RuntimeException("test exception");
 		doThrow(exception).when(userRoleService).delete(userAccountId, roleRoleId);

@@ -58,7 +58,7 @@ public class UserRoleServiceImpl implements UserRoleService {
 
 	@Override
 	public UserRole create(UserRole userRole) {
-		if(userRolePersistence.load(userRole.getUserAccountId(), userRole.getRoleRoleId()) != null) {
+		if(userRolePersistence.load(userRole.getUserAccount().getId(), userRole.getRole().getRoleId()) != null) {
 			throw new IllegalStateException("already.exists");
 		}
 		UserRoleEntity userRoleEntity = new UserRoleEntity();
@@ -69,7 +69,7 @@ public class UserRoleServiceImpl implements UserRoleService {
 
 	@Override
 	public UserRole update(UserRole userRole) {
-		UserRoleEntity userRoleEntity = userRolePersistence.load(userRole.getUserAccountId(), userRole.getRoleRoleId());
+		UserRoleEntity userRoleEntity = userRolePersistence.load(userRole.getUserAccount().getId(), userRole.getRole().getRoleId());
 		userRoleServiceMapper.mapUserRoleToUserRoleEntity(userRole, userRoleEntity);
 		UserRoleEntity userRoleEntitySaved = userRolePersistence.save(userRoleEntity);
 		return userRoleServiceMapper.mapUserRoleEntityToUserRole(userRoleEntitySaved);

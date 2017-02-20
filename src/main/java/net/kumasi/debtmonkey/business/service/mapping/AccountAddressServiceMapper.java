@@ -8,6 +8,7 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.stereotype.Component;
 import net.kumasi.debtmonkey.domain.AccountAddress;
+import net.kumasi.debtmonkey.domain.AddressType;
 import net.kumasi.debtmonkey.domain.jpa.AccountAddressEntity;
 import net.kumasi.debtmonkey.domain.jpa.AddressTypeEntity;
 
@@ -44,7 +45,8 @@ public class AccountAddressServiceMapper extends AbstractServiceMapper {
 
 		//--- Link mapping ( link to AddressType )
 		if(accountAddressEntity.getAddressType() != null) {
-			accountAddress.setAddressTypeId(accountAddressEntity.getAddressType().getId());
+			AddressType addrType = map(accountAddressEntity.getAddressType(), AddressType.class);
+			accountAddress.setAddressType(addrType);
 		}
 		return accountAddress;
 	}

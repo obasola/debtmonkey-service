@@ -153,7 +153,7 @@ public class UserRoleController extends AbstractController {
 
 				//---
 				messageHelper.addMessage(redirectAttributes, new Message(MessageType.SUCCESS,"save.ok"));
-				return redirectToForm(httpServletRequest, userRole.getUserAccountId(), userRole.getRoleRoleId() );
+				return redirectToForm(httpServletRequest, userRole.getUserAccount().getId(), userRole.getRole().getRoleId() );
 			} else {
 				populateModel( model, userRole, FormMode.CREATE);
 				return JSP_FORM;
@@ -187,7 +187,7 @@ public class UserRoleController extends AbstractController {
 				//--- Set the result message
 				messageHelper.addMessage(redirectAttributes, new Message(MessageType.SUCCESS,"save.ok"));
 				log("Action 'update' : update done - redirect");
-				return redirectToForm(httpServletRequest, userRole.getUserAccountId(), userRole.getRoleRoleId());
+				return redirectToForm(httpServletRequest, userRole.getUserAccount().getId(), userRole.getRole().getRoleId() );
 			} else {
 				log("Action 'update' : binding errors");
 				populateModel( model, userRole, FormMode.UPDATE);
